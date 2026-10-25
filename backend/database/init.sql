@@ -133,3 +133,4 @@ CREATE TABLE IF NOT EXISTS detalle_ventas (
   CONSTRAINT chk_detalle_precio CHECK (precio_unitario >= 0)
 ) ENGINE=InnoDB;
 
+
