@@ -288,4 +288,6 @@ class SaleRepository {
     return rows[0];
   }
 }
+
+
 module.exports = new SaleRepository();

@@ -252,4 +252,5 @@ class SaleService {
     return sales.getMetrics(validateSalesFilters(filters));
   }
 }
+
 module.exports = new SaleService();

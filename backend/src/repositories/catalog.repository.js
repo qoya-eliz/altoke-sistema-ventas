@@ -24,4 +24,5 @@ class CatalogRepository {
   }
 }
 
+
 module.exports = new CatalogRepository();

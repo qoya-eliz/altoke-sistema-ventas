@@ -150,4 +150,5 @@ class UserService {
     return userRepository.getMetrics();
   }
 }
+
 module.exports = new UserService();

@@ -86,4 +86,5 @@ class ProductService {
     return repo.getMetrics();
   }
 }
+
 module.exports = new ProductService();
