@@ -1,0 +1,7 @@
+{
+  "name": "altoke-shared",
+  "private": true,
+  "type": "module",
+  "version": "1.1.0",
+  "description": "Catálogo único de reglas y mensajes de validación (backend y frontend)."
+}
