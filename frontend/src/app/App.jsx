@@ -7,8 +7,17 @@ import ProtectedRoute from './ProtectedRoute.jsx';
 import MainLayout from '../layouts/MainLayout.jsx';
 import { legacy } from './routes.config.js';
 const Login = lazy(() => import('../modules/auth/LoginPage.jsx'));
+const SalesReport = lazy(() => import('../modules/sales/pages/SalesReportPage.jsx'));
+const Clients = lazy(() => import('../modules/clients/ClientsPage.jsx'));
+const Products = lazy(() => import('../modules/products/ProductsPage.jsx'));
+const CategoriesAdmin = lazy(() => import('../modules/categories/CategoriesPage.jsx'));
+const UsersAdmin = lazy(() => import('../modules/users/UsersPage.jsx'));
+const POS = lazy(() => import('../modules/sales/pages/PosPage.jsx'));
+const SalesHistoryCashier = lazy(
+  () => import('../modules/sales/pages/SalesHistoryPage.jsx'),
+);
 function home(role) {
-  return role ? '/inicio' : '/login';
+  return role === 'Administrador' ? '/reportes' : '/ventas';
 }
 export default function App() {
   const { user, loading } = useAuth();
@@ -40,7 +49,17 @@ export default function App() {
           />
           <Route element={<ProtectedRoute />}>
             <Route element={<MainLayout />}>
-              <Route path="/inicio" element={<div className="p-4">Sesión iniciada. Los módulos se incorporan en los siguientes commits.</div>} />
+              <Route path="/clientes" element={<Clients key={user?.rol} />} />
+              <Route path="/productos" element={<Products key={user?.rol} />} />
+              <Route element={<ProtectedRoute roles={['Administrador']} />}>
+                <Route path="/reportes" element={<SalesReport />} />
+                <Route path="/categorias" element={<CategoriesAdmin />} />
+                <Route path="/usuarios" element={<UsersAdmin />} />
+              </Route>
+              <Route element={<ProtectedRoute roles={['Cajero']} />}>
+                <Route path="/ventas" element={<POS />} />
+                <Route path="/historial" element={<SalesHistoryCashier />} />
+              </Route>
             </Route>
           </Route>
           {Object.entries(legacy).map(([old, to]) => (
